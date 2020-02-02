@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
 spec:
   rules:
-    - host: unifi.yourdomain.com
+    - host: unifi.yourdomain.tld
       http:
         paths:
           - path: /
@@ -18,5 +18,5 @@ spec:
               servicePort: 8443
   tls: # < placing a host in the TLS config will indicate a certificate should be created
     - hosts:
-        - unifi.yourdomain.com
+        - unifi.yourdomain.tld
       secretName: unifi-cert
