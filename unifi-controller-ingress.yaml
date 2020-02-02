@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: unifi-controller
+  annotations:
+    # use the shared ingress-nginx
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+spec:
+  rules:
+    - host: unifi.yourdomain.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: unifi-controller
+              servicePort: 8443
+  tls: # < placing a host in the TLS config will indicate a certificate should be created
+    - hosts:
+        - unifi.yourdomain.com
+      secretName: unifi-cert
